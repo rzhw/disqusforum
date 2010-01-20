@@ -46,8 +46,13 @@ $(document).ready(function() {
 		window.disqus_no_style = true;
 		$("#disqus_thread_javascript").html('').get(0).appendChild(disqusembed);
 		
-		$("#home").hide();
+		$("#loading").hide();
 		$("#thread").show();
+	}
+	else
+	{
+		$("#loading").hide();
+		$("#home").show();
 	}
 	
 	// adding a new thread
