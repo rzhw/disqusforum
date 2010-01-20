@@ -38,8 +38,7 @@ $(document).ready(function() {
 		var params = $.deparam(Base64.decode(paramsraw));
 		
 		disqus_identifier = paramsraw;
-		disqus_url = location.href;
-		
+		disqus_url = disqus_url_base + paramsraw;
 		disqus_title = params.title;
 		
 		$("#thread_title").text(params.title);
