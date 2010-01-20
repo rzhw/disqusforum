@@ -32,30 +32,17 @@ disqusembed.src = 'http://disqus.com/forums/a2hforumexperiment/embed.js';
 
 $(document).ready(function() {
 	// do we have any parameters?
-	var params = '';
-	var paramsarr = String(document.location).split('?');
-	if (paramsarr[1])
+	var paramsraw = $.param.querystring();
+	if (paramsraw)
 	{
-		params = paramsarr[1];
-	}
-	
-	// parse any parameters
-	if (params != '')
-	{
-		var afterparams = String(params).split('#');
-		if (afterparams[1])
-		{
-			params = afterparams[0];
-		}
+		var params = $.deparam(Base64.decode(paramsraw));
 		
-		disqus_identifier = params;
+		disqus_identifier = paramsraw;
 		disqus_url = location.href;
 		
-		paramsdecoded = $.deparam(Base64.decode(params));
+		disqus_title = params.title;
 		
-		disqus_title = paramsdecoded.title;
-		
-		$("#thread_title").text(paramsdecoded.title);
+		$("#thread_title").text(params.title);
 		
 		window.disqus_no_style = true;
 		$("#disqus_thread_javascript").html('').get(0).appendChild(disqusembed);
@@ -79,6 +66,7 @@ $(document).ready(function() {
 			disqus_title = $("#new_thread_title").attr('value');
 			
 			$("#thread_title").text($("#new_thread_title").attr('value'));
+			$("#thread_loading").show();
 			
 			// http://www.pleaselistencarefully.com/2009/10/how-to-load-disqus-comments.html
 			window.disqus_no_style = true;
