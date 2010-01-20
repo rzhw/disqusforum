@@ -1,0 +1,31 @@
+body
+{
+	font-family:verdana;
+	font-size:12px;
+	text-align:center;
+}
+
+header,section,footer,aside,nav,article,figure
+{
+	display:block;  
+}
+
+#wrap
+{
+	width:1008px;
+	text-align:left;
+	margin:0px auto;
+}
+
+#footer
+{
+	margin-top:32px;
+}
+
+.subform
+{
+	border:1px solid #000;
+	width:480px;
+	margin-left:32px;
+	padding:16px;
+}
