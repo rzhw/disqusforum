@@ -1,14 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<script type="text/javascript">
+		/**
+		 * DISQUS Forum Experiment
+		 * Copyright (c) 2010 a2h - http://a2h.uni.cc/
+		 * 
+		 * This program is free software: you can redistribute it and/or modify
+		 * it under the terms of the GNU General Public License as
+		 * published by the Free Software Foundation, either version 3 of the
+		 * License, or (at your option) any later version.
+		 * 
+		 * This program is distributed in the hope that it will be useful,
+		 * but WITHOUT ANY WARRANTY; without even the implied warranty of
+		 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		 * GNU Affero General Public License for more details.
+		 * 
+		 * You should have received a copy of the GNU General Public License
+		 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+		 */
+		</script>
 		<meta charset="UTF-8">
 		<title>DISQUS Forum Experiment</title>
+		<style type="text/css">
+			body
+			{
+				font-family:verdana;
+				font-size:12px;
+				text-align:center;
+			}
+			
+			header,section,footer,aside,nav,article,figure
+			{
+				display:block;  
+			}
+			
+			#wrap
+			{
+				width:1008px;
+				text-align:left;
+				margin:0px auto;
+			}
+			
+			#footer
+			{
+				margin-top:32px;
+			}
+			
+			.subform
+			{
+				border:1px solid #000;
+				width:480px;
+				margin-left:32px;
+				padding:16px;
+			}
+		</style>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+		<script type="text/javascript" src="sha256.js"></script>
+		<script type="text/javascript" src="disqus_style.js"></script>
+		<script type="text/javascript">
+			var disqus_developer = true;
+			var disqus_url = '';
+			var disqus_identifier = '';
+			var disqus_title = '';
+			var disqus_message = '';
+			
+			var disqus_url_base = 'http://a2h.github.com/disqusforum/?';
+			
+			var workingmsg_template = ' <span>working...</span>';
+			
+			var disqusembed = document.createElement('script');
+			disqusembed.type = 'text/javascript';
+			disqusembed.src = 'http://disqus.com/forums/a2hforumexperiment/embed.js';
+			disqusembed.onload = function() { /* */ }
+			
+			$(document).ready(function() {
+				// do we have any parameters?
+				var params = '';
+				var paramsarr = String(document.location).split('?');
+				if (paramsarr[1])
+				{
+					params = paramsarr[1];
+				}
+				
+				// parse any parameters
+				if (params != '')
+				{
+					var afterparams = String(params).split('#');
+					if (afterparams[1])
+					{
+						params = afterparams[0];
+					}
+					
+					disqus_identifier = params;
+					disqus_url = location.href;
+					
+					$("#thread_title").text('[TODO: Get thread title]');
+					
+					window.disqus_no_style = true;
+					$("#disqus_thread_javascript").html('').get(0).appendChild(disqusembed);
+					
+					$("#home").hide();
+					$("#thread").show();
+				}
+				
+				// adding a new thread
+				$("#new_thread").click(function() {
+					$("#new_thread_form").slideDown().submit(function(e) {
+						var workingmsg = $(workingmsg_template);
+						$(this).append(workingmsg);
+						
+						disqus_identifier = hex_sha256(Date().toString());
+						disqus_url = disqus_url_base + disqus_identifier;
+						disqus_title = $("#new_thread_title").attr('value');
+						
+						location.href = location.href + '#' + disqus_identifier;
+						
+						$("#thread_title").text($("#new_thread_title").attr('value'));
+						
+						// http://www.pleaselistencarefully.com/2009/10/how-to-load-disqus-comments.html
+						window.disqus_no_style = true;
+						$("#disqus_thread_javascript").html('').get(0).appendChild(disqusembed);
+						
+						$("#home").hide();
+						$("#thread").show();
+						
+						return false;
+					});
+				});
+			});
+			
+			/*function disqusCreate()
+			{
+				var links = document.getElementsByTagName('a');
+				var query = '?';
+				for(var i = 0; i < links.length; i++) {
+				if(links[i].href.indexOf('#disqus_thread') >= 0) {
+					query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+				}
+				}
+				
+				if (!$("#disqus_javascript").length)
+				{
+					$('<div id="disqus_javascript">').appendTo("body");
+				}
+				
+				$("#disqus_javascript").html('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/a2hforumexperiment/get_num_replies.js' + query + '"></' + 'script>');
+			}
+			
+			function disqusDestroy()
+			{
+				$("#disqus_javascript").remove();
+			}*/
+		</script>
 	</head>
 	
 	<body>
-		<h1>A forum built entirely in JavaScript and DISQUS</h1>
-		<h2>Is it possible? Who knows.</h2>
-		
-		
+		<div id="wrap">
+			<h1>JavaScript/DISQUS experiment</h1>
+			
+			<section id="home">
+				<button id="new_thread">New Thread</button>
+				<form id="new_thread_form" class="subform" style="display:none;">
+					<label for="new_thread_title">Title:</label><br />
+					<input type="text" id="new_thread_title" />
+					
+					<br />
+					<br />
+					
+					<!--<label for="new_thread_content">Content:</label><br />
+					<textarea id="new_thread_content"></textarea>
+					
+					<br />
+					<br />-->
+					
+					<input type="submit" value="Add" />
+				</form>
+				
+				<div id="recentcomments" class="dsq-widget">
+					<h2 class="dsq-widget-title">Recent Comments</h2>
+					<script type="text/javascript" src="http://disqus.com/forums/a2hforumexperiment/recent_comments_widget.js?num_items=20&hide_avatars=1&avatar_size=32&excerpt_length=200"></script>
+				</div>
+			</section>
+			
+			<section id="thread" style="display:none;">
+				<h2 id="thread_title">Thread title</h2>
+				<!--<div id="thread_content">Thread content</div>-->
+				
+				<div id="disqus_thread"></div>
+				<div id="disqus_thread_javascript"></div>
+			</section>
+			
+			<!--<footer id="footer">
+				<a href="http://disqus.com/">Powered by Disqus</a>
+			</footer>-->
+		</div>
 	</body>
 </html>
