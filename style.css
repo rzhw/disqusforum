@@ -1,8 +1,11 @@
 body
 {
+	background:#eee;
 	font-family:verdana;
 	font-size:12px;
 	text-align:center;
+	margin:24px;
+	padding:0px;
 }
 
 header,section,footer,aside,nav,article,figure
@@ -10,16 +13,26 @@ header,section,footer,aside,nav,article,figure
 	display:block;  
 }
 
+h1
+{
+	margin-top:0px;
+	padding-top:0px;
+}
+
 #wrap
 {
-	width:1008px;
+	background:#fff;
+	width:976px;
 	text-align:left;
 	margin:0px auto;
+	padding:24px;
 }
 
 #footer
 {
-	margin-top:32px;
+	margin-top:16px;
+	color:#aaa;
+	font-size:10px;
 }
 
 .subform
