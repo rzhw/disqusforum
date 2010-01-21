@@ -41,20 +41,19 @@
 				<h2>Loading...</h2>
 			</section>
 			
-			<section id="home" style="display:none;">
-				<button id="new_thread">New Thread</button>
-				<form id="new_thread_form" class="subform" style="display:none;">
-					<label for="new_thread_title">Title:</label><br />
-					<input type="text" id="new_thread_title" />
+			<section id="home" style="display:none;">				
+				<div id="threadlist">
+					<h2 class="left">Threads</h2>
+					<div class="right">
+						<button id="new_thread" class="right">New Thread</button>
+						<form id="new_thread_form" class="clear subform" style="display:none;">
+							<input type="text" id="new_thread_title" class="idle" value="Title" />							
+							<input type="submit" value="Add" />
+							<input type="button" value="Cancel" class="cancel" />
+						</form>
+					</div>
+					<div class="clear"></div>
 					
-					<br />
-					<br />
-					
-					<input type="submit" value="Add" />
-				</form>
-				
-				<div id="threadlist" class="dsq-widget">
-					<h2 class="dsq-widget-title">Recent Threads</h2>
 					<script type="text/javascript" src="http://disqus.com/forums/a2hforumexperiment/popular_threads_widget.js?num_items=50"></script>
 				</div>
 			</section>

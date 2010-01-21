@@ -154,6 +154,15 @@ $(document).ready(function() {
 			
 			return false;
 		});
+		$("#new_thread_form input.idle").focus(function() {
+			$(this).removeClass('idle').attr('value','');
+		});
+		$("#new_thread_form input.cancel").click(function() {
+			$("#new_thread_form").slideUp(null, function() {
+				$("#new_thread_form").get(0).reset();
+				$("#new_thread_title").addClass('idle');
+			});
+		});
 	});
 });
 

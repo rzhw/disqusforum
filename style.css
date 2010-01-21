@@ -13,7 +13,20 @@ header,section,footer,aside,nav,article,figure
 	display:block;  
 }
 
-h1
+.left
+{
+	float:left;
+}
+.right
+{
+	float:right;
+}
+.clear
+{
+	clear:both;
+}
+
+h1,h2,h3,h4,h5
 {
 	margin-top:0px;
 	padding-top:0px;
@@ -41,7 +54,11 @@ h1
 .subform
 {
 	border:1px solid #000;
-	width:480px;
-	margin-left:32px;
+	width:320px;
 	padding:16px;
+}
+
+input[type=text].idle
+{
+	color:#aaa;
 }
