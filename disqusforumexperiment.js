@@ -69,9 +69,6 @@ $(document).ready(function() {
 			disqus_url = disqus_url_base + disqus_identifier;
 			disqus_title = $("#new_thread_title").attr('value');
 			
-			$("#thread_title").text($("#new_thread_title").attr('value'));
-			$("#thread_loading").show();
-			
 			// http://www.pleaselistencarefully.com/2009/10/how-to-load-disqus-comments.html
 			window.disqus_no_style = true;
 			$("#disqus_thread_javascript").html('').get(0).appendChild(disqusembed);
@@ -79,7 +76,7 @@ $(document).ready(function() {
 			disqusembed.onload = function() { location.href = location.href + '?' + disqus_identifier; }
 			
 			$("#home").hide();
-			$("#thread").show();
+			$("#loading").show();
 			
 			return false;
 		});
