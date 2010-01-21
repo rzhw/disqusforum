@@ -13,6 +13,16 @@ header,section,footer,aside,nav,article,figure
 	display:block;  
 }
 
+table
+{
+	border-spacing:0px;
+}
+td
+{
+	border:0px;
+	padding:0px;
+}
+
 .left
 {
 	float:left;
@@ -61,4 +71,13 @@ h1,h2,h3,h4,h5
 input[type=text].idle
 {
 	color:#aaa;
+}
+
+#threadlist td, #threadlist th
+{
+	padding:4px;
+}
+#threadlist tbody tr:hover
+{
+	background:#f0f0f0;
 }
