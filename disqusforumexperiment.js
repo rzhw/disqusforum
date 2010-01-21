@@ -31,10 +31,11 @@ disqusembed.type = 'text/javascript';
 disqusembed.src = 'http://disqus.com/forums/a2hforumexperiment/embed.js';
 
 $(document).ready(function() {
-	// do we have any parameters?
 	var paramsraw = $.param.querystring();
 	if (paramsraw)
 	{
+		// we got parameters, let's show the topic!
+		
 		var params = $.deparam(Base64.decode(paramsraw));
 		
 		disqus_identifier = paramsraw;
@@ -51,6 +52,56 @@ $(document).ready(function() {
 	}
 	else
 	{
+		// organise the topics (here be dragons)
+		var threads = [];
+		var threadsstr = '';
+		var formatchanged = false;
+		
+		if ($("#threadlist li.dsq-widget-item").length)
+		{
+			$("#threadlist li.dsq-widget-item").each(function() {
+				var meta = $(this).find(".dsq-widget-meta").text().split(' ');
+				if (meta[1] == 'comment' || meta[1] == 'comments')
+				{
+					var comments = meta[0];
+				}
+				else
+				{
+					formatchanged = true;
+				}
+				if (meta[5] == 'ago')
+				{
+					var ago = meta[3] + ' ' + meta[4] + ' ' + meta[5];
+				}
+				else
+				{
+					formatchanged = true;
+				}
+				
+				threads.push({
+					title: $(this).find(".dsq-widget-thread").text(),
+					link: $(this).find(".dsq-widget-thread").attr('href'),
+					comments: !formatchanged ? comments : '--',
+					ago: !formatchanged ? ago : '--'
+				});
+			});
+		}
+		
+		if (formatchanged)
+		{
+			alert('Warning! DISQUS\'s return format for the topics has changed. Expect errors!');
+		}
+		
+		threadsstr += '<table>';
+		
+		$.each(threads, function(i,v) {
+			threadsstr += '<tr><td><a href="' + v.link + '">' + v.title + '</a></td><td>' + v.comments + '</td><td>' + v.ago + '</td></tr>';
+		});
+		
+		threadsstr += '</table>';
+		
+		$("#threadlist .dsq-widget-list").before(threadsstr).hide();
+		
 		$("#loading").hide();
 		$("#home").show();
 	}

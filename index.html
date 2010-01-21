@@ -26,6 +26,8 @@
 		<link type="text/css" rel="stylesheet" href="disqus.css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 		<script type="text/javascript" src="jquery.ba-bbq.min.js"></script>
+		<script type="text/javascript" src="jquery.jgfeed.min.js"></script>
+		<script type="text/javascript" src="date.js"></script>
 		<script type="text/javascript" src="disqusforumexperiment.js"></script>
 	</head>
 	
@@ -48,18 +50,12 @@
 					<br />
 					<br />
 					
-					<!--<label for="new_thread_content">Content:</label><br />
-					<textarea id="new_thread_content"></textarea>
-					
-					<br />
-					<br />-->
-					
 					<input type="submit" value="Add" />
 				</form>
 				
-				<div id="recentcomments" class="dsq-widget">
-					<h2 class="dsq-widget-title">Recent Comments</h2>
-					<script type="text/javascript" src="http://disqus.com/forums/a2hforumexperiment/recent_comments_widget.js?num_items=20&hide_avatars=1&avatar_size=32&excerpt_length=200"></script>
+				<div id="threadlist" class="dsq-widget">
+					<h2 class="dsq-widget-title">Recent Threads</h2>
+					<script type="text/javascript" src="http://disqus.com/forums/a2hforumexperiment/popular_threads_widget.js?num_items=50"></script>
 				</div>
 			</section>
 			
