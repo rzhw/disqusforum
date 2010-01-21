@@ -20,7 +20,7 @@ var disqus_developer = true;
 var disqus_url = '';
 var disqus_identifier = '';
 var disqus_title = '';
-var disqus_message = '';
+var disqus_message = 'This thread was created using a2h\'s DISQUS Forum Experiment, see http://github.com/a2h/disqusforum for source';
 
 var disqus_url_base = 'http://a2h.github.com/disqusforum/?';
 
