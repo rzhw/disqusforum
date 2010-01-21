@@ -92,9 +92,9 @@ $(document).ready(function() {
 			alert('Warning! DISQUS\'s return format for the topics has changed. Expect errors!');
 		}
 		
-		threadsstr += '<table>';
+		threadsstr += '<table style="width:100%;">';
 		
-		threadsstr += '<thead><tr><th>Title</th><th>Comments</th><th>Last activity</th></thead>';
+		threadsstr += '<thead><tr><th>Title</th><th style="width:80px;">Comments</th><th style="width:112px;">Last activity</th></thead>';
 		
 		threadsstr += '<tbody>';
 		
