@@ -92,6 +92,8 @@ $(document).ready(function() {
 			alert('Warning! DISQUS\'s return format for the topics has changed. Expect errors!');
 		}
 		
+		// format the table
+		
 		threadsstr += '<table style="width:100%;">';
 		
 		threadsstr += '<thead><tr><th>Title</th><th style="width:80px;">Comments</th><th style="width:112px;">Last activity</th></thead>';
@@ -99,7 +101,7 @@ $(document).ready(function() {
 		threadsstr += '<tbody>';
 		
 		$.each(threads, function(i,v) {
-			threadsstr += '<tr><td><a href="' + v.link + '">' + v.title + '</a></td><td>' + v.comments + '</td><td>' + v.ago + '</td></tr>';
+			threadsstr += '<tr><td><a href="' + v.link + '">' + v.title + '</a></td><td class="comments"><a href="' + v.link + '#disqus_thread">' + v.comments + '</a></td><td>' + v.ago + '</td></tr>';
 		});
 		
 		threadsstr += '</tbody>';
@@ -108,8 +110,23 @@ $(document).ready(function() {
 		
 		$("#threadlist .dsq-widget-list").before(threadsstr).hide();
 		
-		$("#loading").hide();
-		$("#home").show();
+		// get the proper comment count
+		var query = '?';
+		$("#threadlist a").each(function(i) {
+			if ($(this).attr('href').indexOf('#disqus_thread') >= 0)
+			{
+				query += 'url' + i + '=' + encodeURIComponent($(this).attr('href')) + '&';
+			}
+		});
+		$.getScript('http://disqus.com/forums/a2hforumexperiment/get_num_replies.js' + query, function() {
+			$(".comments").each(function() {
+				$(this).text($(this).text().replace(/[^0-9]/g,''));
+			});
+			
+			// and now we're done!
+			$("#loading").hide();
+			$("#home").show();
+		});
 	}
 	
 	// adding a new thread
