@@ -94,9 +94,15 @@ $(document).ready(function() {
 		
 		threadsstr += '<table>';
 		
+		threadsstr += '<thead><tr><th>Title</th><th>Comments</th><th>Last activity</th></thead>';
+		
+		threadsstr += '<tbody>';
+		
 		$.each(threads, function(i,v) {
 			threadsstr += '<tr><td><a href="' + v.link + '">' + v.title + '</a></td><td>' + v.comments + '</td><td>' + v.ago + '</td></tr>';
 		});
+		
+		threadsstr += '</tbody>';
 		
 		threadsstr += '</table>';
 		
